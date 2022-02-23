@@ -1,3 +1,3 @@
-rootProject.name = "analytics-kotlin-dest-repo-template"
+rootProject.name = "analytics-kotlin-destination-template"
 include("lib")
 includeBuild("publishing-plugins")

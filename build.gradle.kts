@@ -8,9 +8,6 @@ plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm") version "1.5.30"
 
-    // Apply snyk plugin to test vulnerability
-    id("io.snyk.gradle.plugin.snykplugin") version "0.4"
-
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
@@ -26,13 +23,6 @@ buildscript {
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10")
     }
-}
-
-configure<io.snyk.gradle.plugin.SnykExtension> {
-    // setSeverity("high")
-    setAutoDownload(true)
-    setAutoUpdate(true)
-    setArguments("--all-sub-projects --fail-on=upgradable")
 }
 
 nexusPublishing {
