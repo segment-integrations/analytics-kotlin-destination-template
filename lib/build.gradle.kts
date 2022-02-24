@@ -76,3 +76,37 @@ dependencies {
     testImplementation("org.json:json:20200518")
     testImplementation("org.skyscreamer:jsonassert:1.5.0")
 }
+
+// required for mvn-publish
+// too bad we can't move it into mvn-publish plugin because `android`is only accessible here
+tasks {
+    val sourceFiles = android.sourceSets.getByName("main").java.srcDirs
+
+    register<Javadoc>("withJavadoc") {
+        isFailOnError = false
+
+        setSource(sourceFiles)
+
+        // add Android runtime classpath
+        android.bootClasspath.forEach { classpath += project.fileTree(it) }
+
+        // add classpath for all dependencies
+        android.libraryVariants.forEach { variant ->
+            variant.javaCompileProvider.get().classpath.files.forEach { file ->
+                classpath += project.fileTree(file)
+            }
+        }
+    }
+
+    register<Jar>("withJavadocJar") {
+        archiveClassifier.set("javadoc")
+        dependsOn(named("withJavadoc"))
+        val destination = named<Javadoc>("withJavadoc").get().destinationDir
+        from(destination)
+    }
+
+    register<Jar>("withSourcesJar") {
+        archiveClassifier.set("sources")
+        from(sourceFiles)
+    }
+}

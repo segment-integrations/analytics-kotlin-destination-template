@@ -49,10 +49,6 @@ if (getExtraString("signing.keyId") == null) {
     }
 }
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
-
 fun getExtraString(name: String) = ext[name]?.toString()
 
 // If not release build add SNAPSHOT suffix
@@ -63,15 +59,16 @@ fun getVersionName() =
         getExtraString("VERSION_NAME") + "-SNAPSHOT"
 
 afterEvaluate {
-    publishing {
+    configure<PublishingExtension> {
         // Configure all publications
-        publications.withType<MavenPublication> {
+        publications.create<MavenPublication>("test") {
             groupId = getExtraString("GROUP")
             artifactId = getExtraString("POM_ARTIFACT_ID")
             version = getVersionName()
 
-            // Stub javadoc.jar artifact
-            artifact(javadocJar.get())
+            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            artifact(tasks.named<Jar>("withJavadocJar"))
+            artifact(tasks.named<Jar>("withSourcesJar"))
 
             // Provide artifacts information requited by Maven Central
             pom {
@@ -100,6 +97,17 @@ afterEvaluate {
                     developerConnection.set(getExtraString("POM_SCM_DEV_CONNECTION"))
                 }
 
+                withXml {
+                    val dependenciesNode = asNode().appendNode("dependencies")
+                    configurations.getByName("implementation") {
+                        dependencies.forEach {
+                            val dependencyNode = dependenciesNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", it.group)
+                            dependencyNode.appendNode("artifactId", it.name)
+                            dependencyNode.appendNode("version", it.version)
+                        }
+                    }
+                }
             }
         }
     }
