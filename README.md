@@ -4,7 +4,12 @@
 
 ## Getting Started
 
-// TODO
+1. Create repo from this template. The name of the repo should follow this pattern `project-language-destination`. For example `analytics-kotlin-amplitude`
+2. In `settings.gralde.kts`, change `rootProject.name` to match your repo name.
+3. In `gradle.properties`, update the fields with `<>` brackets
+4. Rename `Destination.kt` to a proper name
+5. Implement destination
+6. Add tests
 
 
 ## License
