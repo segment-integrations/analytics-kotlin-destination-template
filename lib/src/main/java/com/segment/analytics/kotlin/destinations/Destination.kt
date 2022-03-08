@@ -1,4 +1,4 @@
-package com.segment.analytics.destinations.plugins
+package com.segment.analytics.kotlin.destinations
 
 import com.segment.analytics.kotlin.core.Analytics
 import com.segment.analytics.kotlin.core.platform.Plugin

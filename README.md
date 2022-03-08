@@ -4,12 +4,19 @@
 
 ## Getting Started
 
-1. Create repo from this template. The name of the repo should follow this pattern `project-language-destination`. For example `analytics-kotlin-amplitude`
+1. Create repo from this template. The name of the repo should follow this pattern `project-language-destination`. For example `analytics-kotlin-firebase`
 2. In `settings.gralde.kts`, change `rootProject.name` to match your repo name.
 3. In `gradle.properties`, update the fields with `<>` brackets
-4. Rename `Destination.kt` to a proper name
-5. Implement destination
-6. Add tests
+4. Delete `com.segment.analytics.kotlin.destinations.Destination.kt`
+5. Create a directory with the destination name under `com.segment.analytics.kotlin.destinations`. For example Firebase, `com.segment.analytics.kotlin.destinations.firebase`
+6. Create your destination class under the directory created in step 5. For example Firebase, `com.segment.analytics.kotlin.destinations.firebase.Firebase.kt`
+7. update Android manifest with your package name. For example Firebase
+   ```xml
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.segment.analytics.kotlin.destinations.firebase">
+   ```
+8. Implement destination
+9. Add tests
 
 
 ## License
