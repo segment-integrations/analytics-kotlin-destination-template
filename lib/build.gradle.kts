@@ -44,11 +44,7 @@ dependencies {
 
     implementation("com.segment.analytics.kotlin:android:1.5.0")
     implementation("androidx.multidex:multidex:2.0.1")
-
     implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
 
     implementation("androidx.lifecycle:lifecycle-process:2.4.1")
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
@@ -56,30 +52,33 @@ dependencies {
 
 // Partner Dependencies
 dependencies {
+    // TODO add your partner deps here
 }
 
 // Test Dependencies
 dependencies {
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
-
-    testImplementation("io.mockk:mockk:1.12.2")
-    testImplementation(platform("org.junit:junit-bom:5.7.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("io.mockk:mockk:1.12.4")
 
     // Add Roboelectric dependencies.
     testImplementation("org.robolectric:robolectric:4.7.3")
     testImplementation("androidx.test:core:1.4.0")
 
     // Add JUnit4 legacy dependencies.
-    testImplementation("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(platform("org.junit:junit-bom:5.7.2"))
 
     // For JSON Object testing
     testImplementation("org.json:json:20200518")
     testImplementation("org.skyscreamer:jsonassert:1.5.0")
+}
+
+// Android Test Deps
+dependencies {
+    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
 
 tasks.withType<Test> {
