@@ -5,5 +5,5 @@
 build
 
 .idea
-
 lib/build
+local.properties
