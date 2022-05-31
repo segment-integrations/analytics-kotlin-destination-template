@@ -8,6 +8,11 @@ import org.json.JSONObject
 import org.skyscreamer.jsonassert.JSONAssert
 import org.skyscreamer.jsonassert.JSONCompareMode
 
+/**
+ * A collection of mockk matchers that are commonly used for testing
+ * More info: https://mockk.io/#custom-matchers
+ */
+
 private data class BundleMatcher(
     val expectedBundle: Bundle
 ) : Matcher<Bundle> {
@@ -36,10 +41,14 @@ private data class BundleMatcher(
     override fun toString() = "matchBundle($expectedBundle)"
 }
 
+/**
+ * Matcher function for Bundle
+ * Usage: verify { myFunction(matchBundle(expectedBundle)) }
+ */
 fun MockKMatcherScope.matchBundle(expectedBundle: Bundle): Bundle =
     match(BundleMatcher(expectedBundle))
 
-private data class JsonObjectMatcher(
+private data class JSONObjectMatcher(
     val expectedJSON: JSONObject
 ) : Matcher<JSONObject> {
 
@@ -56,5 +65,9 @@ private data class JsonObjectMatcher(
     override fun toString() = "matchJSONObject($expectedJSON)"
 }
 
-fun MockKMatcherScope.matchJsonObject(expectedJSON: JSONObject): JSONObject =
-    match(JsonObjectMatcher(expectedJSON))
+/**
+ * Matcher function for JSONObject
+ * Usage: verify { myFunction(matchJSONObject(expectedJSON)) }
+ */
+fun MockKMatcherScope.matchJSONObject(expectedJSON: JSONObject): JSONObject =
+    match(JSONObjectMatcher(expectedJSON))
